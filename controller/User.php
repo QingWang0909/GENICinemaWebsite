@@ -140,17 +140,17 @@ class User
 		}		
 		
 	}
-	
+
 	public static function passwordCheck($usr_name, $pwd)
 	{
 		
 		$query = "SELECT * FROM " . $_SESSION['user_table'] . " WHERE user_name = " . "'$usr_name'";
 		$data = mysql_query($query);
 		
-		if( mysql_num_rows($date) === 0 ){
+		if( mysql_num_rows($data) === 0 ){
 			return -1;
 		}
-		
+
 		if( mysql_num_rows($data) === 1 ){
 			$row = mysql_fetch_row($data);
 			$hashcode = $row[2];
