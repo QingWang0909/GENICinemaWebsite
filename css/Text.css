@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+#loginResult {
+  text-align : center;
+  background : #FF9900;
+  color : #FFFFFF;
+  font-weight : bold;
+  margin-center : 60%;
+}
+
+#signUpResult {
+  background:#FF9900;
+  color:#FFFFFF;
+  font-weight:bold;
+	
+}

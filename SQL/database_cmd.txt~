@@ -1,0 +1,23 @@
+Website Database MySQL cmds
+---------------------------
+# Create Database
+CREATE DATABASE IF NOT EXISTS GENI_Cinema;
+  
+# Create Table "user"
+CREATE TABLE IF NOT EXISTS user(uid INT(11) NOT NULL AUTO_INCREMENT, user_name VARCHAR(16) NOT NULL, password VARCHAR(16) NOT NULL, email VARCHAR(1024) NOT NULL, signup_time DATE NOT NULL, fname VARCHAR(100), lname VARCHAR(100), type VARCHAR(1024) NOT NULL, PRIMARY KEY(uid));
+ 
+ 
+# Create Table "course"
+CREATE TABLE IF NOT EXISTS course(course_id INT(11) NOT NULL AUTO_INCREMENT, course_name VARCHAR(50) NOT NULL, view_pwd VARCHAR(16), admin_pwd VARCHAR(16), school VARCHAR(50) NOT NULL, dept VARCHAR(50) NOT NULL, course_descp VARCHAR(1024), prof_name VARCHAR(50) NOT NULL, course_status VARCHAR(20) NOT NULL, start_time DATE NOT NULL, end_time DATE NOT NULL, uid INT(11) NOT NULL REFERENCES user(uid), PRIMARY KEY(course_id));
+  
+  
+# Create Table "uploading_process"
+# Allow ingress_gw_ip/port and video_channel_id be "NULL" as we want website to cache the video channel info when professor uploading them
+# Chances are: two course video channels are uploaded from different places, in order to give student better visual experiece
+  
+CREATE TABLE IF NOT EXISTS upload_channel_process(process_id INT(11) NOT NULL AUTO_INCREMENT, uid INT(11) NOT NULL REFERENCES user(uid), channel_descp VARCHAR(1024), ingress_gw_ip VARCHAR(50), ingress_gw_port INT(11),  start_time DATE, end_time DATE, video_channel_id INT(11), channel_demand INT(11), course_id INT(11) NOT NULL REFERENCES course(course_id), PRIMARY KEY(process_id));
+  
+  
+# Create Table "video", record video status.
+# This table will update once addVideoChannel function be called
+CREATE TABLE IF NOT EXISTS video(vid INT(11) NOT NULL AUTO_INCREMENT, course_id INT(11) NOT NULL REFERENCES course(course_id), video_channel_id INT    (11) NOT NULL, video_status VARCHAR(10) NOT NULL, upload_process_id int(11) NOT NULL, PRIMARY KEY(vid));

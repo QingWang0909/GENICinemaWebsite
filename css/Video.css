@@ -1,0 +1,20 @@
+.home{
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+
+}
+
+.add{
+	position: fixed;
+	bottom: 0px;
+	right: 20px;
+
+}
+
+.view{
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+
+}
